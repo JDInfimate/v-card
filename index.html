@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
+  <!-- 📱 Mobile scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Be My Valentine 💖</title>
+
   <style>
     body {
       background: linear-gradient(135deg, #ff4d6d, #ffb3c6);
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -14,70 +19,95 @@
       margin: 0;
       text-align: center;
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
+      padding: 15px;
     }
+
     .card {
       background: rgba(255,255,255,0.2);
-      padding: 30px;
+      padding: 25px 20px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-      max-width: 380px;
+      width: 100%;
+      max-width: 360px;
       position: relative;
     }
+
     .heart {
-      font-size: 3em;
+      font-size: 3rem;
       animation: beat 1s infinite;
     }
+
     @keyframes beat {
       0%,100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
+
     img.main {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       object-fit: cover;
       margin: 12px 0;
       border: 3px solid white;
     }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 10px 0;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
     button, a {
-      margin: 10px;
-      padding: 12px 25px;
+      margin: 8px auto;
+      padding: 14px;
       border: none;
-      border-radius: 25px;
-      font-size: 1em;
+      border-radius: 30px;
+      font-size: 1rem;
       cursor: pointer;
       background: white;
       color: #ff4d6d;
+      width: 100%;
+      max-width: 260px;
+      display: block;
     }
+
     .no {
       background: transparent;
       color: white;
       border: 2px solid white;
       position: absolute;
-    }
-    .share {
-      display: inline-block;
-      text-decoration: none;
-      font-size: 0.95em;
+      width: auto;
+      padding: 10px 20px;
     }
 
-    /* 🖼️ Gallery */
+    .share {
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    /* 🖼️ Gallery (mobile friendly) */
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       margin: 15px 0;
     }
+
     .gallery img {
       width: 100%;
-      height: 85px;
+      height: 80px;
       object-fit: cover;
       border-radius: 12px;
       border: 2px solid white;
     }
   </style>
 </head>
+
 <body>
 
   <!-- 🎵 Music -->
@@ -87,8 +117,11 @@
 
   <div class="card" id="card">
     <div class="heart">💖</div>
+
     <img class="main" src="mine.jpg" alt="Her Photo">
+
     <h1>SANGSANGI 💕</h1>
+
     <p>Be honest… you smiled reading this 😘</p>
     <p><strong>Will you be my Valentine?</strong></p>
 
@@ -100,11 +133,13 @@
     const noBtn = document.getElementById("noBtn");
 
     noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("touchstart", moveButton);
 
     function moveButton() {
       const card = document.getElementById("card");
       const maxX = card.clientWidth - noBtn.offsetWidth;
       const maxY = card.clientHeight - noBtn.offsetHeight;
+
       noBtn.style.left = Math.random() * maxX + "px";
       noBtn.style.top = Math.random() * maxY + "px";
     }
@@ -136,16 +171,19 @@
            target="_blank">
            Share on WhatsApp 💬
         </a>
-        <br>
-        <button class="share" onclick="shareInstagram()">Share on Instagram 📸</button>
+
+        <button class="share" onclick="shareInstagram()">
+          Share on Instagram 📸
+        </button>
       `;
     }
 
     function shareInstagram() {
       navigator.clipboard.writeText(window.location.href);
-      alert("Link copied 📋\nPaste it in Instagram story or DM 💖");
+      alert("Link copied 💖 Paste it in Instagram!");
       window.open("https://www.instagram.com", "_blank");
     }
   </script>
+
 </body>
 </html>
